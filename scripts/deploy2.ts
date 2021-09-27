@@ -1,17 +1,18 @@
-import hre from "hardhat";
-import { DeployFunction } from "hardhat-deploy/types";
+import hre from 'hardhat';
+import { SimpleStorage, SimpleStorage__factory } from '../typechain';
 
 const deploy = async () => {
-  const SimpleStorage = await hre.ethers.getContractFactory("SimpleStorage");
+  const SimpleStorage = (await hre.ethers.getContractFactory(
+    'SimpleStorage'
+  )) as SimpleStorage__factory;
 
-  const simpleStorage = await SimpleStorage.deploy();
+  const simpleStorage = (await SimpleStorage.deploy()) as SimpleStorage;
+
   await simpleStorage.deployed();
-  const addr = simpleStorage.address;
-  console.log(addr);
-  await simpleStorage.store(15);
-  await simpleStorage.deployed();
+  const tx = await simpleStorage.store(15);
+  await tx.wait();
   const result = await simpleStorage.retrieve();
-  console.log(result);
+  console.log(result.toNumber());
 };
 
 deploy()
