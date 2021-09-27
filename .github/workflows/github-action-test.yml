@@ -4,9 +4,6 @@ jobs:
   Explore-GitHub-Actions:
     runs-on: ubuntu-latest
     steps:
-      - name: Delete yarn.lock
-        run: 'rm yarn.lock'
-      - name: Install
         run: yarn
       - name: Run tests
         run: yarn hardhat test
