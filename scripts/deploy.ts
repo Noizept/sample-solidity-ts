@@ -1,8 +1,8 @@
-import hre from 'hardhat';
+import { ethers } from 'hardhat';
 import { SimpleStorage, SimpleStorage__factory } from '../typechain';
 
 const deploy = async () => {
-  const SimpleStorage = (await hre.ethers.getContractFactory(
+  const SimpleStorage = (await ethers.getContractFactory(
     'SimpleStorage'
   )) as SimpleStorage__factory;
 
