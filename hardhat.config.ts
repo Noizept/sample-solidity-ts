@@ -12,11 +12,11 @@ const config: HardhatUserConfig = {
   defaultNetwork: 'hardhat',
   networks: {
     hardhat: {},
-    rinkeby: {
-      gasMultiplier: 2,
-      url: `https://rinkeby.infura.io/v3/${process.env.alchemyApiKey}`,
-      accounts: [process.env.mnemonic ?? ''],
-    },
+    // rinkeby: {
+    //   gasMultiplier: 2,
+    //   url: `https://rinkeby.infura.io/v3/${process.env.alchemyApiKey}`,
+    //   accounts: [process.env.mnemonic ?? ''],
+    // },
   },
 };
 
