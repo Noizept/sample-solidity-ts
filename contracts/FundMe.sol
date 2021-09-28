@@ -65,4 +65,11 @@ contract FundMe {
         }
         funders = new address[](0);
     }
+
+    function getEntranceFee() public view returns (uint256) {
+        uint256 min = 50 * 10**18;
+        uint256 ethPrice = getPrice();
+        uint256 precision = 1 * 10**18;
+        return (min * precision) / ethPrice;
+    }
 }

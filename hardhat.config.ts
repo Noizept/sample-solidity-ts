@@ -4,6 +4,8 @@ import 'hardhat-prettier';
 import { HardhatUserConfig } from 'hardhat/types';
 import '@typechain/hardhat';
 import '@nomiclabs/hardhat-ethers';
+import '@nomiclabs/hardhat-etherscan';
+
 import '@nomiclabs/hardhat-waffle';
 import 'hardhat-dependency-compiler';
 
@@ -12,12 +14,15 @@ const config: HardhatUserConfig = {
     compilers: [{ version: '0.8.4' }, { version: '0.6.6' }],
   },
   defaultNetwork: 'hardhat',
-  networks: {
-    rinkeby: {
-      gasMultiplier: 2,
-      url: `https://rinkeby.infura.io/v3/${process.env.alchemyApiKey}`,
-      accounts: [process.env.account1 ?? '',process.env.account2??''],
-    },
+  // networks: {
+  //   rinkeby: {
+  //     gasMultiplier: 2,
+  //     url: `https://rinkeby.infura.io/v3/${process.env.alchemyApiKey}`,
+  //     accounts: [process.env.account1 ?? '',process.env.account2??''],
+  //   },
+  // },
+  etherscan:{
+    apiKey: process.env.ether_scan_token
   },
   dependencyCompiler: {
     paths: [
