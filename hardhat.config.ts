@@ -2,14 +2,17 @@ import dotenv from 'dotenv';
 dotenv.config();
 import 'hardhat-prettier';
 import { HardhatUserConfig } from 'hardhat/types';
-import 'hardhat-deploy';
-import 'hardhat-deploy-ethers';
 import '@typechain/hardhat';
 import '@nomiclabs/hardhat-ethers';
 import '@nomiclabs/hardhat-waffle';
+import 'hardhat-dependency-compiler';
+
 const config: HardhatUserConfig = {
-  solidity: '0.8.4',
+  solidity: {
+    compilers: [{ version: '0.8.4' }, { version: '0.6.6' }],
+  },
   defaultNetwork: 'hardhat',
+
   networks: {
     hardhat: {},
     // rinkeby: {
@@ -17,6 +20,12 @@ const config: HardhatUserConfig = {
     //   url: `https://rinkeby.infura.io/v3/${process.env.alchemyApiKey}`,
     //   accounts: [process.env.mnemonic ?? ''],
     // },
+  },
+  dependencyCompiler: {
+    paths: [
+      '@chainlink/contracts/src/v0.6/interfaces/AggregatorV3Interface.sol',
+      '@chainlink/contracts/src/v0.6/vendor/SafeMathChainlink.sol',
+    ],
   },
 };
 

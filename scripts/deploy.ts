@@ -5,7 +5,6 @@ const deploy = async () => {
   const SimpleStorage = (await ethers.getContractFactory(
     'SimpleStorage'
   )) as SimpleStorage__factory;
-
   const simpleStorage = (await SimpleStorage.deploy()) as SimpleStorage;
 
   await simpleStorage.deployed();
