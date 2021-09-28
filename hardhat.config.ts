@@ -12,14 +12,12 @@ const config: HardhatUserConfig = {
     compilers: [{ version: '0.8.4' }, { version: '0.6.6' }],
   },
   defaultNetwork: 'hardhat',
-
   networks: {
-    hardhat: {},
-    // rinkeby: {
-    //   gasMultiplier: 2,
-    //   url: `https://rinkeby.infura.io/v3/${process.env.alchemyApiKey}`,
-    //   accounts: [process.env.mnemonic ?? ''],
-    // },
+    rinkeby: {
+      gasMultiplier: 2,
+      url: `https://rinkeby.infura.io/v3/${process.env.alchemyApiKey}`,
+      accounts: [process.env.account1 ?? '',process.env.account2??''],
+    },
   },
   dependencyCompiler: {
     paths: [

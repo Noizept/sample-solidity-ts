@@ -2,8 +2,10 @@ import { ethers } from 'hardhat';
 import { SimpleStorage, SimpleStorage__factory } from '../typechain';
 
 const deploy = async () => {
+  const signers = await ethers.getSigners();
+
   const SimpleStorage = (await ethers.getContractFactory(
-    'SimpleStorage'
+    'SimpleStorage',signers[0]
   )) as SimpleStorage__factory;
   const simpleStorage = (await SimpleStorage.deploy()) as SimpleStorage;
 
