@@ -18,12 +18,12 @@ const config: HardhatUserConfig = {
   //   rinkeby: {
   //     gasMultiplier: 2,
   //     url: `https://rinkeby.infura.io/v3/${process.env.alchemyApiKey}`,
-  //     accounts: [process.env.account1 ?? '',process.env.account2??''],
+  //     accounts: [process.env.account1 ?? '', process.env.account2 ?? ''],
   //   },
   // },
-  etherscan:{
-    apiKey: process.env.ether_scan_token
-  },
+  // etherscan: {
+  //   apiKey: process.env.ether_scan_token,
+  // },
   dependencyCompiler: {
     paths: [
       '@chainlink/contracts/src/v0.6/interfaces/AggregatorV3Interface.sol',

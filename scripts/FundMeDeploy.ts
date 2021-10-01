@@ -2,7 +2,7 @@ import hre, { ethers, network } from 'hardhat';
 import { FundMe, FundMe__factory } from '../typechain';
 import { deployV3AgrretatorMock } from './utils';
 
-const deploy = async () => {
+export const deploy = async () => {
   const signers = await ethers.getSigners();
   const FundMe = (await ethers.getContractFactory(
     'FundMe',
@@ -12,7 +12,6 @@ const deploy = async () => {
   let priceFeedAddress = '0x8A753747A1Fa494EC906cE90E9f37563A8AF630e';
 
   if (network.name === 'hardhat') {
-    console.log('@@@@ - Deploying Mocks');
     priceFeedAddress = await deployV3AgrretatorMock();
   }
 
