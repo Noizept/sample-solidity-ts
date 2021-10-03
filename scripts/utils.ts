@@ -6,7 +6,11 @@ import {
   VRFCoordinatorMock,
   VRFCoordinatorMock__factory,
 } from '../typechain';
-import { LinkToken, LinkToken__factory } from '../typechain';
+import {
+  LinkToken,
+  LinkToken__factory,
+  LinkTokenInterface,
+} from '../typechain';
 
 export const deployV3AgrretatorMock = async (): Promise<string> => {
   const MockV3Aggregator = (await ethers.getContractFactory(
@@ -41,4 +45,27 @@ export const deployVRFMock = async (link: string): Promise<string> => {
   )) as VRFCoordinatorMock;
   await mockV3Aggregator.deployed();
   return mockV3Aggregator.address;
+};
+
+export const fundWithLink = async ({
+  contractAddress,
+  linkToken,
+  amount = '100000000000000000',
+}: {
+  contractAddress: string;
+  accountAddress: string;
+  linkToken: string;
+  amount?: string;
+}) => {
+  const [deployer] = await ethers.getSigners();
+
+  const link = LinkToken__factory.getContract(
+    linkToken,
+    LinkToken__factory.createInterface(),
+    deployer
+  ) as LinkToken;
+
+  return await link.transfer(contractAddress, amount, {
+    from: deployer.address,
+  });
 };

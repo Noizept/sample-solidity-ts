@@ -25,6 +25,8 @@ const config: HardhatUserConfig = {
       gasMultiplier: 2,
       url: `https://rinkeby.infura.io/v3/${process.env.alchemyApiKey}`,
       accounts: [process.env.account1 ?? '', process.env.account2 ?? ''],
+      gas: 2100000,
+      gasPrice: 8000000000,
     },
   },
   etherscan: {

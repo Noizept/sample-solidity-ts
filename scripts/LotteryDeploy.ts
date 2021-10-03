@@ -5,6 +5,7 @@ import {
   deployV3AgrretatorMock,
   deployLinkTokenMock,
   deployVRFMock,
+  fundWithLink,
 } from './utils';
 
 const deploy = async () => {
@@ -29,7 +30,7 @@ const deploy = async () => {
     priceFeedAddress,
     vrfCoordinatorLink,
     linkToken,
-    1,
+    '100000000000000000',
     keyHash
   )) as Lottery;
   await lottery.deployed();
@@ -42,11 +43,23 @@ const deploy = async () => {
 
   //Get Entrance Fee and Enter Lottery
   const entranceFee = await lottery.getEntranceFee();
+
   tx = await lottery.enter({
     from: deployer.address,
-    value: entranceFee,
+    value: entranceFee.toHexString(),
   });
+  tx.wait();
 
+  //End Lottery
+  tx = await fundWithLink({
+    linkToken,
+    contractAddress: lottery.address,
+    accountAddress: deployer.address,
+  });
+  tx.wait();
+  tx = await lottery.endLottery({ from: deployer.address });
+  tx.wait();
+  console.log(await lottery.recentWinner());
   // if (network.name !== 'hardhat') {
   //   await hre.run('verify:verify', {
   //     address: lottery.address,
@@ -54,7 +67,7 @@ const deploy = async () => {
   //       priceFeedAddress,
   //       vrfCoordinatorLink,
   //       linkToken,
-  //       1,
+  //           '100000000000000000',
   //       keyHash,
   //     ],
   //   });
