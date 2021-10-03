@@ -1,6 +1,5 @@
 import { ethers } from 'hardhat';
 import { expect } from 'chai';
-import { deploy } from '../scripts/FundMeDeploy';
 import { FundMe } from '../typechain/FundMe';
 import { FundMe__factory } from '../typechain';
 import { deployV3AgrretatorMock } from '../scripts/utils';
